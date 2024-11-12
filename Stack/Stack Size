@@ -1,0 +1,19 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+  // Create a stack of strings called cars
+  stack<string> cars;
+
+  // Add elements to the stack
+  cars.push("Volvo");
+  cars.push("BMW");
+  cars.push("Ford");
+  cars.push("Audi");
+  cars.push("Mazda");
+  
+  // Get the size of the stack
+  cout << cars.size();
+  return 0;
+}
