@@ -12,7 +12,7 @@ LIFO stands for **Last in, First Out**.
 Unlike vectors, **elements in the stack are not accessed by index numbers**. Since elements are added and removed from the top, you can **only access the element at the top of the stack**.
 
 # To use a stack, you have to include the <stack> header file:
-  #include <stack>
+        #include <stack>
 # Queue:
 A queue stores multiple elements in a specific order, called **FIFO**.
 
@@ -25,8 +25,4 @@ FIFO stands for **First in, First Out**.
 Unlike vectors, elements in the **queue are not accessed by index numbers**. Since **queue elements are added at the end and removed from the front**, you can only access an element at the front or the back.
 
 # To use a queue, you have to include the <queue> header file:
-  #include <queue>
-  
-
-// Include the queue library
-#include <queue>
+      #include <queue>
