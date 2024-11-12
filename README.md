@@ -11,6 +11,4 @@ LIFO stands for **Last in, First Out**.
 Unlike vectors, **elements in the stack are not accessed by index numbers**. Since elements are added and removed from the top, you can **only access the element at the top of the stack**.
 
 # To use a stack, you have to include the <stack> header file:
-
-// Include the stack library
-#include <stack>
+                #include <stack>
