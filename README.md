@@ -13,4 +13,4 @@ Unlike vectors, **elements in the stack are not accessed by index numbers**. Sin
 # To use a stack, you have to include the <stack> header file:
 
 // Include the stack library
-**#include <stack>**
+#include <stack>
