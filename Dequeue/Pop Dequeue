@@ -1,0 +1,24 @@
+#include <iostream>
+#include <deque>
+using namespace std;
+
+int main() {
+  deque<string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+
+  // Remove the first element
+  cars.pop_front();
+
+  // Remove the last element
+  cars.pop_back();
+  
+  // Print list elements
+  for (string car : cars) {
+    cout << car <<endl;
+  }
+
+  return 0;
+}
+
+OUTPUT: 
+BMW 
+Ford
