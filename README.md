@@ -25,4 +25,23 @@ FIFO stands for **First in, First Out**.
 Unlike vectors, elements in the **queue are not accessed by index numbers**. Since **queue elements are added at the end and removed from the front**, you can only access an element at the front or the back.
 
 # To use a queue, you have to include the <queue> header file:
-      #include <queue>
+       #include <queue>
+# Create a Queue:
+      queue<string> cars;
+      
+**Note: You cannot add elements to the queue at the time of declaration, like you can with vectors:**
+
+                        queue<string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+# Add Elements to the Queue:
+
+                        queue<string> cars;
+                        cars.push("Volvo");
+                        cars.push("BMW");
+                        cars.push("Ford");
+                        cars.push("Mazda");
+                        
+**In a queue, you can only access the element at the front or the back, using .front() and .back() respectively**
+
+**You can also use .front and .back to change the value of the front and back elements**
+
+**.pop() function to remove an element from the queue.**
