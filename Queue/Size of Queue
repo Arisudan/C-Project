@@ -1,0 +1,15 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+  queue<string> cars;
+  cars.push("BMW");
+  cars.push("Audi");
+  cars.push("Ford");
+  cars.push("Mazda");
+  cout << cars.size();
+  return 0;
+}
+
+OUTPUT: 4
