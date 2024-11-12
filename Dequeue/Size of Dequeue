@@ -1,0 +1,16 @@
+#include <iostream>
+#include <deque>
+using namespace std;
+
+int main() {
+  // Create a deque called cars that will store strings
+  deque<string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+
+  // Try to access an element that does not exist (will throw an exception)
+  cout << cars.at(9);
+  return 0;
+}
+
+OUTPUT:
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  deque::_M_range_check: __n (which is 9)>= this->size() (which is 4)
