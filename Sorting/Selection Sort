@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void selectionSort(int arr[], int n) {
+    // Traverse through all array elements
+    for (int i = 0; i < n - 1; i++) {
+        // Assume the minimum is the current element
+        int minIndex = i;
+
+        // Traverse the unsorted portion of the array
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j; // Update the index of the minimum element
+            }
+        }
+
+        // Swap the found minimum element with the first element
+        if (minIndex != i) {
+            swap(arr[i], arr[minIndex]);
+        }
+
+        // Print the array after each outer loop pass
+        cout << "Step " << i + 1 << ": ";
+        for (int k = 0; k < n; k++) {
+            cout << arr[k] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 14, 24, 13};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+
+    cout << "Original array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    selectionSort(arr, n);
+    cout<< "Final Sorted Value: ";
+    return 0;
+}
