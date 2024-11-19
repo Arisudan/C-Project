@@ -1,0 +1,101 @@
+#include <iostream>
+#include <stack>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Function to display the current list of tasks
+void showTasks(const vector<string>& tasks) {
+    cout << "\nCurrent Tasks:\n";
+    if (tasks.empty()) {
+        cout << "No tasks available.\n";
+    } else {
+        for (size_t i = 0; i < tasks.size(); i++) {
+            cout << i + 1 << ". " << tasks[i] << '\n';
+        }
+    }
+}
+
+int main() {
+    vector<string> tasks; // List of tasks
+    stack<vector<string>> history; // Undo history
+
+    while (true) {
+        // Display menu options
+        cout << "\nMenu:\n";
+        cout << "1. Add Task\n";
+        cout << "2. Modify Task\n";
+        cout << "3. Delete Task\n";
+        //cout << "4. Undo Last Action\n";
+        cout << "4. Show Tasks\n";
+        cout << "5. Exit\n";
+        cout << "Choose an option: ";
+        
+        int choice;
+        cin >> choice;
+        cin.ignore(); 
+
+        switch (choice) {
+            case 1: { 
+                history.push(tasks);
+                cout << "Enter the new task: ";
+                string task;
+                getline(cin, task);
+                tasks.push_back(task); 
+                cout << "Task added successfully!\n";
+                break;
+            }
+            
+            case 2: { 
+                history.push(tasks);
+                showTasks(tasks); 
+                cout << "Enter the task number to modify: ";
+                int tasknum;
+                cin >> tasknum;
+                cin.ignore();
+
+                if (tasknum > 0 && tasknum <= tasks.size()) {
+                    cout << "Enter the new description for Task " << tasknum << ": ";
+                    getline(cin, tasks[tasknum - 1]); 
+                    cout << "Task modified successfully!"<<endl;
+                } else {
+                    cout << "Invalid task number!"<<endl;
+                }
+                break;
+            }
+            
+            case 3: {
+                history.push(tasks);
+                showTasks(tasks); 
+                cout << "Enter the task number to delete: ";
+                int tasknum;
+                cin >> tasknum;
+                cin.ignore();
+
+                if (tasknum > 0 && tasknum <= tasks.size()) {
+                    tasks.erase(tasks.begin() + tasknum - 1);
+                    cout << "Task deleted successfully!"<<endl;
+                } else {
+                    cout << "Invalid task number!"<< endl;
+                }
+                break;
+            }
+            
+            case 4: { 
+                showTasks(tasks); 
+                break;
+            }
+
+            case 5: { 
+                cout << "Exiting the program. Goodbye!"<<endl;
+                return 0; 
+            }
+
+            default:
+                cout << "Invalid choice. Please try again."<<endl;
+        }
+    }
+
+    return 0;
+}
