@@ -1,0 +1,87 @@
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+
+int main() {
+    priority_queue<string> tasks;
+    int choice;
+    
+    while (true) {
+        cout << "\n1. Add Task\n2. Modify Task\n3. Delete Task\n4. Show Tasks\n5. Exit\nChoose an option: ";
+        cin >> choice;
+        cin.ignore();
+        
+        if (choice == 1) {
+            cout << "Enter task: ";
+            string task;
+            getline(cin, task);
+            tasks.push(task);
+        } 
+        else if (choice == 2) {
+            cout << "Enter task number to modify: ";
+            int taskNum;
+            cin >> taskNum;
+            cin.ignore();
+            
+            if (taskNum > 0 && taskNum <= tasks.size()) {
+                priority_queue<string> tempQueue = tasks;
+                string newTask;
+                for (int i = 1; tempQueue.size() > 0; ++i) {
+                    if (i == taskNum) {
+                        cout << "Enter new description: ";
+                        getline(cin, newTask);
+                        tempQueue.pop();
+                        tempQueue.push(newTask);
+                        break;
+                    }
+                    tempQueue.pop();
+                }
+                tasks = tempQueue;
+            } else {
+                cout << "Invalid task number.\n";
+            }
+        } 
+        else if (choice == 3) {
+            cout << "Enter task number to delete: ";
+            int taskNum;
+            cin >> taskNum;
+            cin.ignore();
+            
+            if (taskNum > 0 && taskNum <= tasks.size()) {
+                priority_queue<string> tempQueue;
+                int i = 1;
+                while (tempQueue.size() > 0) {
+                    if (i != taskNum) {
+                        tempQueue.push(tasks.top());
+                    }
+                    tasks.pop();
+                    ++i;
+                }
+                tasks = tempQueue;
+            } else {
+                cout << "Invalid task number.\n";
+            }
+        } 
+        else if (choice == 4) {
+            if (tasks.empty()) {
+                cout << "No tasks available.\n";
+            } else {
+                priority_queue<string> tempQueue = tasks;
+                int i = 1;
+                while (tempQueue.size() > 0) {
+                    cout << i++ << ". " << tempQueue.top() << endl;
+                    tempQueue.pop();
+                }
+            }
+        } 
+        else if (choice == 5) {
+            cout << "Goodbye!\n";
+            break;
+        } 
+        else {
+            cout << "Invalid choice.\n";
+        }
+    }
+    return 0;
+}
