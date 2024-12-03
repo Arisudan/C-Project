@@ -15,7 +15,7 @@ int main() {
         if (choice == 1) {
             cout << "Enter task: ";
             string task;
-            getline(cin, task);
+            getline(cin, task); //Reads the entire line, including spaces.
             tasks.push(task);
         } 
         else if (choice == 2) {
