@@ -46,12 +46,12 @@ Unlike vectors, elements in the **queue are not accessed by index numbers**. Sin
 
 **.pop() function to remove an element from the queue.**
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Arrow operator -> in C/C++ with Examples.**
 
 An Arrow operator in C/C++ allows to access elements in Structures and Unions. It is used with a pointer variable pointing to a structure or union. The arrow operator is formed by using a minus sign, followed by the greater than symbol as shown below. 
-**#Syntax**
+
+# Syntax:
 (pointer_name)->(variable_name)
 
 Operation: The -> operator in C or C++ gives the value held by variable_name to structure or union variable pointer_name.
