@@ -1,0 +1,186 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include <queue>
+using namespace std;
+
+// Node structure for linked list to store tasks
+struct TaskNode {
+    string task;
+    int priority;
+    TaskNode* next;
+};
+
+// Task list class to manage tasks in a linked list
+class TaskList {
+public:
+    TaskNode* head;
+
+    TaskList() : head(nullptr) {}
+
+    // Add a task to the list with a given priority
+    void addTask(const string& task, int priority) {
+        TaskNode* newNode = new TaskNode{task, priority, nullptr};
+        if (!head || priority > head->priority) {
+            newNode->next = head;
+            head = newNode;
+        } else {
+            TaskNode* current = head;
+            while (current->next && current->next->priority >= priority) {
+                current = current->next;
+            }
+            newNode->next = current->next;
+            current->next = newNode;
+        }
+    }
+
+    // Modify a task by its position in the list
+    void modifyTask(int taskNum, const string& newTask) {
+        TaskNode* current = head;
+        for (int i = 1; current && i < taskNum; ++i) {
+            current = current->next;
+        }
+        if (current) {
+            current->task = newTask;
+        } else {
+            cout << "Invalid task number." << endl;
+        }
+    }
+
+    // Delete a task by its position in the list
+    void deleteTask(int taskNum) {
+        if (!head) return;
+        if (taskNum == 1) {
+            TaskNode* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        TaskNode* current = head;
+        for (int i = 1; current->next && i < taskNum - 1; ++i) {
+            current = current->next;
+        }
+        if (current->next) {
+            TaskNode* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        } else {
+            cout << "Invalid task number." << endl;
+        }
+    }
+
+    // Display all tasks in the list
+    void showTasks() const {
+        if (!head) {
+            cout << "No tasks available." << endl;
+        } else {
+            TaskNode* current = head;
+            int index = 1;
+            while (current) {
+                cout << index++ << ". [" << current->priority << "] " << current->task << endl;
+                current = current->next;
+            }
+        }
+    }
+};
+
+// Task manager class to integrate undo functionality and manage tasks
+class TaskManager {
+    TaskList tasks;
+    stack<pair<int, string>> undoStack;
+
+public:
+    // Add a task
+    void addTask(const string& task, int priority) {
+        tasks.addTask(task, priority);
+    }
+
+    // Modify a task and save the original task for undo
+    void modifyTask(int taskNum, const string& newTask) {
+        TaskNode* current = tasks.head;
+        for (int i = 1; current && i < taskNum; ++i) {
+            current = current->next;
+        }
+        if (current) {
+            undoStack.push({taskNum, current->task});
+            tasks.modifyTask(taskNum, newTask);
+        } else {
+            cout << "Invalid task number." << endl;
+        }
+    }
+
+    // Delete a task
+    void deleteTask(int taskNum) {
+        tasks.deleteTask(taskNum);
+    }
+
+    // Show all tasks
+    void showTasks() const {
+        tasks.showTasks();
+    }
+
+    // Undo the last modification
+    void undo() {
+        if (!undoStack.empty()) {
+            auto [taskNum, oldTask] = undoStack.top();
+            undoStack.pop();
+            tasks.modifyTask(taskNum, oldTask);
+        } else {
+            cout << "Nothing to undo." << endl;
+        }
+    }
+};
+
+int main() {
+    TaskManager manager;
+    int choice;
+
+    while (true) {
+        cout << "\n1. Add Task\n2. Modify Task\n3. Delete Task\n4. Show Tasks\n5. Undo\n6. Exit\nChoose an option: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Enter task: ";
+            string task;
+            getline(cin, task);
+            cout << "Enter priority (higher number = higher priority): ";
+            int priority;
+            cin >> priority;
+            cin.ignore();
+            manager.addTask(task, priority);
+        } 
+        else if (choice == 2) {
+            cout << "Enter task number to modify: ";
+            int taskNum;
+            cin >> taskNum;
+            cin.ignore();
+            cout << "Enter new description: ";
+            string newTask;
+            getline(cin, newTask);
+            manager.modifyTask(taskNum, newTask);
+        } 
+        else if (choice == 3) {
+            cout << "Enter task number to delete: ";
+            int taskNum;
+            cin >> taskNum;
+            cin.ignore();
+            manager.deleteTask(taskNum);
+        } 
+        else if (choice == 4) {
+            manager.showTasks();
+        } 
+        else if (choice == 5) {
+            manager.undo();
+        } 
+        else if (choice == 6) {
+            cout << "Goodbye!" << endl;
+            break;
+        } 
+        else {
+            cout << "Invalid choice." << endl;
+        }
+    }
+
+    return 0;
+}
